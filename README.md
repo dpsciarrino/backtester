@@ -32,7 +32,7 @@ The tables in the database need to have the following naming convention:
     ```<Ticker>_<Number_Of_Intervals><Interval_Type>```
 
 Where:
-- ```<TICKER>``` is the ticker of the stock/security
+- ```<Ticker>``` is the ticker of the stock/security
 - ```<Interval_Type>``` is the timeframe interval. It can be either:
     - 'Min'
     - 'Day'
