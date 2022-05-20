@@ -66,7 +66,7 @@ class Database:
     def get_cursor_by_name(self, name):
         return self._cursors[name]
     
-    def close_connection(self):
+    def disconnect(self):
         if self._conn != None:
             self._conn.close()
             self._conn = None

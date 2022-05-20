@@ -78,16 +78,17 @@ class SimpleMovingAverage_Strategy(bt.Strategy):
 database = Database(db_name='stock_database.db')
 
 # Specify parameters for dataframe construction
-ticker = 'SPY'
-timeframe = consts._DAY
-columns = ['datetime', 'close', 'open', 'high', 'low']
+params = {
+    'ticker': 'SPY',
+    'timeframe': consts._DAY,
+    'columns': ['datetime', 'close', 'open', 'high', 'low']
+}
+database.connect()
+dataframe = database.get_dataframe(params=params)
+database.disconnect()
 
-# Create the dataframe object to operate on for backtesting
-dataframe = util.get_dataframe_from_database(database, ticker, timeframe, columns)
-    
 # Instantiate the Strategy
 strategy = SimpleMovingAverage_Strategy()
 
 # Run the backtest using the dataframe and strategy objects
 backtest = bt.Backtest(dataframe, strategy).run()
-

@@ -10,5 +10,5 @@ def get_dataframe_from_database(database:Database, ticker, timeframe=const._DAY,
     }
     database.connect()
     df = database.get_dataframe(params=params)
-    database.close_connection()
+    database.disconnect()
     return df
