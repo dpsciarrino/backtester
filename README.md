@@ -6,7 +6,7 @@ This project is heavily influenced by the mechanics of the popular and fantastic
 
 ## Setting Up the Database
 
-## Disclaimer
+### Disclaimer
 
 This is the most important part. Due to the nature of the project, this needs to be followed to a T in order to have it work correctly IF YOU ARE TO START FROM SCRATCH.
 
