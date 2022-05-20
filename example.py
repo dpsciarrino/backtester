@@ -88,4 +88,4 @@ database.disconnect()
 strategy = SimpleMovingAverage_Strategy()
 
 # Run the backtest using the dataframe and strategy objects
-backtest = bt.Backtest(dataframe, strategy).run()
+bt.Backtest(dataframe, strategy).run()
