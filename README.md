@@ -98,7 +98,7 @@ You now have a database you can use for backtesting, along with any other desire
 ## Creating Indicators
 
 Indicators are defined with at least the following functions:
-- __init__: ```__init__(self, name:str, *args, **kwargs)```
+- `__init__`: ```__init__(self, name:str, *args, **kwargs)```
 - f: ```f(self) -> pd.Series```
 
 ### Initializing an Indicator
