@@ -135,11 +135,11 @@ Notice that the ```init()``` function required for the strategy definition is no
 
 Use the ```init()``` method to specify a name using ```self._name = "..."```.
 
-Also, add any indicators you need to define your strategy using the ```add_indicator(Indicator)``` method provided by the extended Strategy class, where Indicator is an instance of the Strategy you defined above.
+Also, add any indicators you need to define your strategy using the ```add_indicator(i)``` method provided by the extended Strategy class, where `i` is an instance of the Indicator you defined above.
 
 ### The apply() Function
 
-The apply function is used by the Backtest to implement your strategy on each row of data. It should have the following structure:
+The apply function is used by the Backtest to implement your strategy on each row of data in an iterated fashion. It should have the following structure:
 
 ```
 def apply(self, current_data:pd.Dataframe, lookback_data:pd.DataFrame):
@@ -149,6 +149,8 @@ def apply(self, current_data:pd.Dataframe, lookback_data:pd.DataFrame):
 The ```current_data``` parameter represents the current row of pricing data during the iteration of the backtest.
 
 The ```lookback_data``` parameter represents the current row, along with the previous ```lookback``` rows of pricing data and is served as a Dataframe object. The integer ```lookback``` setting can be set during the Strategy initialization (in the ```init``` function) using ```self.lookback = ... ```.
+
+The lookback feature is put in place because sometimes you have strategies that require historical pricing information. This is provided as a mechanism you can use to access past data during the backtest iteration.
 
 ## Backtesting
 
@@ -174,5 +176,7 @@ database.disconnect()
 strategy = Your_Strategy()
 backtest.Backtest(dataframe, strategy).run()
 ```
+
+Where you must define ```Your_Strategy()``` as described, and as exemplified in the ```example.py``` file..
 
 Again, this is currently under development and will probably spit out a bunch of results that aren't readily useful at this point. Stay tuned, though. Exciting things are coming.
