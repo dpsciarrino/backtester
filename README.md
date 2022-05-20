@@ -38,9 +38,9 @@ The table structure for Daily data is as follows:
 
 ```| datetime | open | high | low | close | volume |```
 
-All fields are TEXT. The 'datetime' is setup as a primary key and should be in 'YYYY-MM-DD' format.
+All fields are TEXT. The ```datetime``` is setup as a primary key and should be in ```YYYY-MM-DD``` format.
 
-The table structure for Minute data is the same as above, with the exception that datetime should be in 'YYYY-MM-DD HH:MM' format.
+The table structure for Minute data is the same as above, with the exception that ```datetime``` should be in ```YYYY-MM-DD HH:MM``` format.
 
 I recommend generating a CSV file, cleaning that up, and migrating that to a SQLite database, following the naming and format guidelines above.
 
@@ -48,9 +48,13 @@ I recommend generating a CSV file, cleaning that up, and migrating that to a SQL
 
 To use the database, instantiate a Database object using the following line:
 
-```database = Database(db_name='stock_database.db')```
+```
+from database import Database
 
-where the assignment to db_name is the SQLite database filename.
+database = Database(db_name='stock_database.db')
+```
+
+where the assignment to ```db_name``` is the SQLite database filename.
 
 If you have another path other than the parent directory of this project you can specify it using the ```db_path``` parameter:
 
