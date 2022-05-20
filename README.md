@@ -95,3 +95,84 @@ database.disconnect()
 
 You now have a database you can use for backtesting, along with any other desired operations.
 
+## Creating Indicators
+
+Indicators are defined with at least the following functions:
+- __init__: ```__init__(self, name:str, *args, **kwargs)```
+- f: ```f(self) -> pd.Series```
+
+### Initializing an Indicator
+
+Indicators are classes that extend the Indicator class in the backtest.py file. The ```__init__``` of the custom indicator should have ```name``` as the first argument.
+
+Additional parameters used for the indicator (such as period or a series to act on) should be passed in using the typical args and kwargs, which the user must define and use to their own dicretion.
+
+Always call ```super().__init__(name)``` when initializing the custom Indicator object.
+
+It's a good idea to error check the parameters you pass into ```args``` and raise the correct Exceptions.
+
+To use the parameters, register then as instance variables using ```self```.
+
+### The 'f' Function
+
+The 'f' function is used to run your indicator during the backtest. It should return a pandas Series object, ideally the same length (number of rows) as the pricing data you are backtesting over.
+
+### Indicator Example
+
+The ```example.py``` file has an example of a Simple Moving Average Indicator.
+
+## Creating Strategies
+
+The Strategy object requires two functions to be defined:
+- init: ```init(self)```
+- apply: ```apply(self, current_data:pd.Dataframe, lookback_data:pd.Dataframe)```
+
+### Initializing a Strategy
+
+Strategies are classes that extend the Strategy class found in the ```backtest.py``` file.
+
+Notice that the ```init()``` function required for the strategy definition is not the magic method. Also, no calls to super() are needed in this instance.
+
+Use the ```init()``` method to specify a name using ```self._name = "..."```.
+
+Also, add any indicators you need to define your strategy using the ```add_indicator(Indicator)``` method provided by the extended Strategy class, where Indicator is an instance of the Strategy you defined above.
+
+### The apply() Function
+
+The apply function is used by the Backtest to implement your strategy on each row of data. It should have the following structure:
+
+```
+def apply(self, current_data:pd.Dataframe, lookback_data:pd.DataFrame):
+    ...
+```
+
+The ```current_data``` parameter represents the current row of pricing data during the iteration of the backtest.
+
+The ```lookback_data``` parameter represents the current row, along with the previous ```lookback``` rows of pricing data and is served as a Dataframe object. The integer ```lookback``` setting can be set during the Strategy initialization (in the ```init``` function) using ```self.lookback = ... ```.
+
+## Backtesting
+
+The backtesting function (the whole point of this project!!) is still being developed...
+
+### Running a Backtest
+
+Currently, if you followed what's outlined in the README above, you can run a backtest using the following block:
+
+```
+from database import Database
+import backtest
+
+database = Database(db_name='stock_database.db')
+params = {
+    'ticker': 'SPY',
+    'timeframe': 'DAY',
+    'columns': ['datetime', 'close', 'open', 'high', 'low']
+}
+database.connect()
+dataframe = database.get_dataframe(params=params)
+database.disconnect()
+strategy = Your_Strategy()
+backtest.Backtest(dataframe, strategy).run()
+```
+
+Again, this is currently under development and will probably spit out a bunch of results that aren't readily useful at this point. Stay tuned, though. Exciting things are coming.

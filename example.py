@@ -50,23 +50,20 @@ class SimpleMovingAverage_Strategy(bt.Strategy):
         # Name the strategy
         self._name = "SMA Crossover Strategy"
 
-        self.lookback = 1
-
         # Add the indicators to your strategy.
         self.add_indicator(SMA("10-Period SMA", 10, self.data['close']))
         self.add_indicator(SMA("100-Period SMA", 100, self.data['close']))
     
     # Define your strategy here. Backtest runs this function to apply your strategy.
-    def apply(self, df:pd.DataFrame, prev_df:pd.DataFrame):
-        above_10_period = float(df['close']) > df['10-Period SMA']
-        above_100_period = float(df['close']) > df['100-Period SMA']
+    def apply(self, current_data:pd.DataFrame, lookback_data:pd.DataFrame):
+        above_10_period = float(current_data['close']) > current_data['10-Period SMA']
 
-        sma10_above_sma100 = df['10-Period SMA'] > df['100-Period SMA']
+        sma10_above_sma100 = current_data['10-Period SMA'] > current_data['100-Period SMA']
         
         if( above_10_period and sma10_above_sma100):
-            return buy(_MARKET, shares = 1, price=float(df['open']))
+            return buy(_MARKET, shares = 1, price=float(current_data['open']))
         elif ( sma10_above_sma100 == False):
-            return short(_MARKET, shares = 1, price=float(df['close']))
+            return short(_MARKET, shares = 1, price=float(current_data['close']))
         
         return None
 
