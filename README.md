@@ -160,6 +160,10 @@ The ```lookback_data``` parameter represents the current row, along with the pre
 
 The lookback feature is put in place because sometimes you have strategies that require historical pricing information. This is provided as a mechanism you can use to access past data during the backtest iteration.
 
+### Strategy Example
+
+The ```example.py``` file has an example of a Simple Moving Average Strategy.
+
 ## Backtesting
 
 The backtesting function (the whole point of this project!!) is still being developed...
@@ -185,6 +189,6 @@ strategy = Your_Strategy()
 backtest.Backtest(dataframe, strategy).run()
 ```
 
-Where you must define ```Your_Strategy()``` as described, and as exemplified in the ```example.py``` file..
+Where you must define ```Your_Strategy()``` as exemplified in the ```example.py``` file.
 
 Again, this is currently under development and will probably spit out a bunch of results that aren't readily useful at this point. Stay tuned, though. Exciting things are coming.
