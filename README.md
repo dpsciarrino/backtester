@@ -2,7 +2,15 @@
 
 Backtester is a framework for testing trading strategies.
 
+This project is heavily influenced by the mechanics of the popular and fantastic Backtesting library on PyPI. The goal with this project, Backtester, is to harbor more versatility by allowing forms of data other than just pricing information into the Strategy and Indicator definitions.
+
 ## Setting Up the Database
+
+## Disclaimer
+
+This is the most important part. Due to the nature of the project, this needs to be followed to a T in order to have it work correctly IF YOU ARE TO START FROM SCRATCH.
+
+However, the project itself relies on a Pandas dataframe. If you can build the dataframe in the expected format you should be able to use Backtester without issues. You will need to read this section to get a grasp of the expected format.
 
 ### Location
 
