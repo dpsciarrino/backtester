@@ -6,9 +6,9 @@ Backtester is a framework for testing trading strategies.
 
 ### Location
 
-Currently, Backtester expects a SQLite database file to retrieve data. The default, expected database name is 'stock_database.db'. If you want to use a different name, you will need to change it using the db_name parameter when instantiating the Database object (see later section on Usage).
+Currently, Backtester expects a SQLite database file to retrieve data. The default, expected database name is ```stock_database.db```. If you want to use a different name, you will need to change it using the ```db_name``` parameter when instantiating the Database object (see later section on Usage).
 
-Create a folder called 'data' that sits in the parent directory of the project, like so:
+Create a folder called ```data``` that sits in the parent directory of the project, like so:
 
 Parent_Directory
   - backtester
@@ -21,21 +21,22 @@ Parent_Directory
 ### Table Names
 
 The tables in the database need to have the following naming convention:
-    <Ticker>_<Number_Of_Intervals><Interval_Type>
+    ```<Ticker>_<Number_Of_Intervals><Interval_Type>```
 
 Where:
-- <TICKER> is the ticker of the stock/security
-- <Interval_Type> is the timeframe interval. It can be either:
+- ```<TICKER>``` is the ticker of the stock/security
+- ```<Interval_Type>``` is the timeframe interval. It can be either:
     - 'Min'
     - 'Day'
-- <Number_Of_Intervals> is the number of timeframe intervals between each row in the data.
+- ```<Number_Of_Intervals>``` is the number of timeframe intervals between each row in the data.
 
-For example, BA_1Day means you have data from ticker BA and the timeframe between each row is 1 Day. Similarly, MMM_1Min means you have data from ticker MMM and the timeframe between each row is 1Min.
+For example, ```BA_1Day``` means you have data from ticker BA and the timeframe between each row is 1 Day. Similarly, ```MMM_1Min``` means you have data from ticker MMM and the timeframe between each row is 1Min.
 
 ### Table Structure
 
 The table structure for Daily data is as follows:
-  | datetime | open | high | low | close | volume |
+
+```| datetime | open | high | low | close | volume |```
 
 All fields are TEXT. The 'datetime' is setup as a primary key and should be in 'YYYY-MM-DD' format.
 
