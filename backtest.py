@@ -177,9 +177,9 @@ class Backtest:
             self._data_test.add_column(i, self._strategy.run_indicator(i))
             print(f"     INDICATOR ADDED: {i}")
         
-
         # Iterate through the data one at a time.
         self._data_test._init()
+        
         while(self._data_test._has_next()):
             # Obtain the current data value
             current_data = self._data_test._next()
